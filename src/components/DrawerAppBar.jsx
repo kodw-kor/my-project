@@ -14,10 +14,15 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { LanguageSharp } from "@mui/icons-material";
+import { Link, Outlet } from "react-router-dom";
 import images from "../assets";
 
 const drawerWidth = 240;
-const navItems = ["home", "login", "sign up"];
+const navItems = [
+  { title: "home", path: "/" },
+  { title: "login", path: "/login" },
+  { title: "sign up", path: "sign-up" },
+];
 
 function DrawerAppBar(props) {
   const { window } = props;
@@ -46,9 +51,9 @@ function DrawerAppBar(props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.title} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <ListItemText primary={item.title} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -78,17 +83,19 @@ function DrawerAppBar(props) {
           </Box>
           <Box sx={{ display: "flex", flexDirection: "row" }}>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              {navItems.map((item) => (
-                <Button
-                  key={item}
-                  sx={{
-                    color: "#fff",
-                    textTransform: "none",
-                    fontSize: "1.1rem",
-                  }}
-                >
-                  {item}
-                </Button>
+              {navItems.map((item, index) => (
+                <Link key={index} to={item.path}>
+                  <Button
+                    key={index}
+                    sx={{
+                      color: "#fff",
+                      textTransform: "none",
+                      fontSize: "1.1rem",
+                    }}
+                  >
+                    {item.title}
+                  </Button>
+                </Link>
               ))}
             </Box>
             <Box
@@ -129,8 +136,9 @@ function DrawerAppBar(props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box component="main" sx={{ p: 3 }}>
+      <Box sx={{ width: "100%", height: "95vh" }} component="main">
         <Toolbar />
+        <Outlet />
       </Box>
     </Box>
   );
