@@ -16,30 +16,56 @@ import Button from "@mui/material/Button";
 import { LanguageSharp } from "@mui/icons-material";
 import { Link, Outlet } from "react-router-dom";
 import images from "../assets";
+import { useTranslation } from "react-i18next";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../configs/firebase";
+import { saveUserData, loadUserData } from "../utils/storage";
 
 const drawerWidth = 240;
 const navItems = [
-  { title: "home", path: "/" },
-  { title: "login", path: "/login" },
-  { title: "sign up", path: "sign-up" },
+  {
+    title: "home",
+    path: "/",
+    onClick: () => {
+      console.log(loadUserData());
+    },
+  },
+  {
+    title: "login",
+    path: "/login",
+    onClick: () => {
+      signInWithPopup(auth, provider)
+        .then((e) => {
+          const token = e.user.accessToken;
+          const email = e.user.email;
+          const displayName = e.user.displayName;
+          const uid = e.user.uid;
+          saveUserData({ uid, token, email, displayName });
+        })
+        .catch((err) => {
+          console.error("Error signing in with Google:", err);
+        });
+    },
+  },
 ];
 
 function DrawerAppBar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [languageText, setLanguageText] = useState("EN");
+  const { t, i18n } = useTranslation();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
   const onLanguageButtonClick = (event) => {
-    // Todo: Implement i18n
-
     if (languageText === "EN") {
       setLanguageText("KR");
+      i18n.changeLanguage("ko");
     } else {
       setLanguageText("EN");
+      i18n.changeLanguage("en");
     }
   };
 
@@ -84,18 +110,17 @@ function DrawerAppBar(props) {
           <Box sx={{ display: "flex", flexDirection: "row" }}>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navItems.map((item, index) => (
-                <Link key={index} to={item.path}>
-                  <Button
-                    key={index}
-                    sx={{
-                      color: "#fff",
-                      textTransform: "none",
-                      fontSize: "1.1rem",
-                    }}
-                  >
-                    {item.title}
-                  </Button>
-                </Link>
+                <Button
+                  key={index}
+                  sx={{
+                    color: "#fff",
+                    textTransform: "none",
+                    fontSize: "1.1rem",
+                  }}
+                  onClick={item.onClick}
+                >
+                  {t(item.title)}
+                </Button>
               ))}
             </Box>
             <Box
@@ -136,7 +161,7 @@ function DrawerAppBar(props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box sx={{ width: "100%", height: "95vh" }} component="main">
+      <Box sx={{ width: "100%", height: "cal(100vh - 64px)" }} component="main">
         <Toolbar />
         <Outlet />
       </Box>

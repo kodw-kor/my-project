@@ -1,0 +1,10 @@
+{
+  "welcome": "애플리케이션에 오신 것을 환영합니다",
+  "greeting": "안녕하세요, {{name}}!",
+  "home": "홈",
+  "login": "로그인",
+  "main-subtitle": "CS 성공으로 가는 기차가 곧 출발합니다!",
+  "learn-more": "더 보기",
+  "stress-free-learning": "스트레스 없는 학습",
+  "stress-free-learning-contents": "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+}
