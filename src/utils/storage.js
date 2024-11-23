@@ -6,4 +6,8 @@ const loadUserData = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
-export { saveUserData, loadUserData };
+const clearUserData = () => {
+  localStorage.clear("user");
+};
+
+export { saveUserData, loadUserData, clearUserData };

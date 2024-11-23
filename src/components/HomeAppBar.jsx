@@ -17,13 +17,14 @@ import { LanguageSharp } from "@mui/icons-material";
 import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import images from "../assets";
 import { useTranslation } from "react-i18next";
-import { signInWithPopup } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { auth, provider } from "../configs/firebase";
 import { saveUserData, loadUserData, clearUserData } from "../utils/storage";
+import { Stack } from "@mui/material";
 
 const drawerWidth = 240;
 
-function DrawerAppBar(props) {
+function HomeAppBar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [languageText, setLanguageText] = useState("EN");
@@ -32,25 +33,13 @@ function DrawerAppBar(props) {
 
   const navItems = [
     {
-      title: "home",
-      path: "/",
+      title: "logout",
+      path: "/intro",
       onClick: () => {
-        console.log(loadUserData());
-        clearUserData();
-      },
-    },
-    {
-      title: "login",
-      path: "/login",
-      onClick: () => {
-        signInWithPopup(auth, provider)
-          .then((e) => {
-            const token = e.user.accessToken;
-            const email = e.user.email;
-            const displayName = e.user.displayName;
-            const uid = e.user.uid;
-            saveUserData({ uid, token, email, displayName });
-            navigate("/");
+        signOut(auth, provider)
+          .then(() => {
+            clearUserData();
+            navigate("/intro");
           })
           .catch((err) => {
             console.error("Error signing in with Google:", err);
@@ -108,11 +97,41 @@ function DrawerAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", sm: "flex" },
+              alignItems: "center",
+            }}
+          >
             <img style={{ width: "50px" }} src={images.ppLogoWhite} />
+            <Box sx={{ marginLeft: "50px" }}>
+              <Typography>{loadUserData().email}</Typography>
+            </Box>
           </Box>
-          <Box sx={{ display: "flex", flexDirection: "row" }}>
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Box
+              sx={{ display: { xs: "none", sm: "flex" }, alignItems: "center" }}
+            >
+              <Typography
+                marginRight="25px"
+                fontWeight="bold"
+                fontSize="1.2rem"
+              >
+                Unit Name
+              </Typography>
+              <span style={{ marginRight: "20px" }}>
+                <img style={{ width: "130px" }} src={images.train} />
+              </span>
+              <Stack flexDirection="row" marginRight="20px">
+                <img style={{ width: "25px" }} src={images.iconBadge} />
+                <Typography fontWeight="bold">4</Typography>
+              </Stack>
               {navItems.map((item, index) => (
                 <Button
                   key={index}
@@ -165,7 +184,7 @@ function DrawerAppBar(props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box sx={{ width: "100%", height: "cal(100vh - 64px)" }} component="main">
+      <Box sx={{ width: "100%", height: "95vh" }} component="main">
         <Toolbar />
         <Outlet />
       </Box>
@@ -173,4 +192,4 @@ function DrawerAppBar(props) {
   );
 }
 
-export default DrawerAppBar;
+export default HomeAppBar;

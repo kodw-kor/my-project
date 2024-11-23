@@ -8,6 +8,14 @@ const images = {
   rail2: new URL("./rail-2.png", import.meta.url).href,
   rail3: new URL("./rail-3.png", import.meta.url).href,
   rail4: new URL("./rail-4.png", import.meta.url).href,
+  train: new URL("./train.png", import.meta.url).href,
+  iconBadge: new URL("./icon-badge.png", import.meta.url).href,
+  mainRail: new URL("./main-rail.png", import.meta.url).href,
+  marker: new URL("./marker.png", import.meta.url).href,
+  grayStone: new URL("./gray-stone.png", import.meta.url).href,
+  yellowStone: new URL("./yellow-stone.png", import.meta.url).href,
+  arrowLeft: new URL("./arrow-left.png", import.meta.url).href,
+  dummyRectangle: new URL("./dummy-rectangle.png", import.meta.url).href,
 };
 
 export default images;
