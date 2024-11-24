@@ -21,6 +21,7 @@ import { signOut } from "firebase/auth";
 import { auth, provider } from "../configs/firebase";
 import { saveUserData, loadUserData, clearUserData } from "../utils/storage";
 import { Stack } from "@mui/material";
+import { useUserDataStore } from "../stores/userDataStore";
 
 const drawerWidth = 240;
 
@@ -30,6 +31,7 @@ function HomeAppBar(props) {
   const [languageText, setLanguageText] = useState("EN");
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const userData = useUserDataStore((state) => state.userData);
 
   const navItems = [
     {
@@ -106,7 +108,7 @@ function HomeAppBar(props) {
           >
             <img style={{ width: "50px" }} src={images.ppLogoWhite} />
             <Box sx={{ marginLeft: "50px" }}>
-              <Typography>{loadUserData().email}</Typography>
+              <Typography>{loadUserData()?.email}</Typography>
             </Box>
           </Box>
           <Box
@@ -123,14 +125,16 @@ function HomeAppBar(props) {
                 fontWeight="bold"
                 fontSize="1.2rem"
               >
-                Unit Name
+                {userData?.currentUnit}
               </Typography>
               <span style={{ marginRight: "20px" }}>
                 <img style={{ width: "130px" }} src={images.train} />
               </span>
               <Stack flexDirection="row" marginRight="20px">
                 <img style={{ width: "25px" }} src={images.iconBadge} />
-                <Typography fontWeight="bold">4</Typography>
+                <Typography fontWeight="bold">
+                  {userData?.badgeCount}
+                </Typography>
               </Stack>
               {navItems.map((item, index) => (
                 <Button
@@ -184,7 +188,7 @@ function HomeAppBar(props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box sx={{ width: "100%", height: "95vh" }} component="main">
+      <Box sx={{ width: "100%", height: "100vh" }} component="main">
         <Toolbar />
         <Outlet />
       </Box>

@@ -1,36 +1,39 @@
 import { Box } from "@mui/material";
 import images from "../assets";
+import { useNavigate } from "react-router-dom";
 
-const StonesContainer = () => {
+const StonesContainer = ({ currentPosition, stoneInfos }) => {
+  const targetStone = stoneInfos[currentPosition];
+  const navigate = useNavigate();
   return (
     <>
-      <Box sx={{ position: "absolute", top: 0, left: 300 }}>
-        <img style={{ width: "130px" }} src={images.grayStone} />
-      </Box>
-      <Box sx={{ position: "absolute", top: 0, left: 600 }}>
-        <img style={{ width: "130px" }} src={images.grayStone} />
-      </Box>
-      <Box sx={{ position: "absolute", top: 0, left: 900 }}>
-        <img style={{ width: "130px" }} src={images.grayStone} />
-      </Box>
-      <Box sx={{ position: "absolute", top: 180, right: 300 }}>
-        <img style={{ width: "130px" }} src={images.yellowStone} />
-      </Box>
-      <Box sx={{ position: "absolute", top: 180, right: 700 }}>
-        <img style={{ width: "130px" }} src={images.yellowStone} />
-      </Box>
-      <Box sx={{ position: "absolute", top: 280, left: 140 }}>
-        <img style={{ width: "130px" }} src={images.yellowStone} />
-      </Box>
-      <Box sx={{ position: "absolute", top: 400, left: 400 }}>
-        <img style={{ width: "130px" }} src={images.yellowStone} />
-      </Box>
-      <Box sx={{ position: "absolute", top: 400, left: 700 }}>
-        <img style={{ width: "130px" }} src={images.yellowStone} />
-      </Box>
-      <Box sx={{ position: "absolute", top: 400, right: 100 }}>
-        <img style={{ width: "130px" }} src={images.yellowStone} />
-      </Box>
+      <img
+        id="stone-marker"
+        style={{
+          zIndex: 100,
+          position: "absolute",
+          left: targetStone?.left ? targetStone?.left + 30 : undefined,
+          right: targetStone?.right ? targetStone?.right + 30 : undefined,
+          top: targetStone?.top - 40,
+          cursor: "pointer",
+        }}
+        onClick={() => {
+          navigate("/" + stoneInfos[currentPosition]?.path);
+        }}
+        src={images.marker}
+      />
+      {stoneInfos.map(({ top, left, right }, i) => (
+        <Box
+          id={"stone-" + i}
+          key={i}
+          sx={{ position: "absolute", top, left, right }}
+        >
+          <img
+            style={{ width: "130px" }}
+            src={currentPosition > i ? images.grayStone : images.yellowStone}
+          />
+        </Box>
+      ))}
     </>
   );
 };

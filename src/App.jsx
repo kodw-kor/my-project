@@ -15,6 +15,7 @@ function App() {
 
   useEffect(() => {
     const user = loadUserData();
+    console.log(user);
     if (!user) {
       navigate("/intro");
     }
