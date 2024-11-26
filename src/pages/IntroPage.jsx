@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 const IntroPage = () => {
   const { t } = useTranslation();
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="md">
       <Box sx={{ position: "relative" }}>
         <img
           style={{ position: "absolute", width: "250px", top: -33 }}
@@ -33,6 +33,16 @@ const IntroPage = () => {
             zIndex: -100,
           }}
           src={images.rail4}
+        />
+        <img
+          style={{
+            position: "absolute",
+            width: "40px",
+            left: 0,
+            top: "1050px",
+            zIndex: -100,
+          }}
+          src={images.rail5}
         />
       </Box>
       <Stack alignItems="center">
@@ -87,7 +97,77 @@ const IntroPage = () => {
             </Typography>
           </Stack>
         </Stack>
+        <Stack
+          flexDirection="row-reverse"
+          justifyContent="space-around"
+          alignItems="center"
+          marginTop="40px"
+          width="100%"
+        >
+          <Box>
+            <Box sx={{ position: "relative" }}>
+              <img src={images.photoBackground2} style={{ width: "300px" }} />
+              <img
+                src={images.dummyImage1}
+                style={{
+                  position: "absolute",
+                  width: "70px",
+                  left: 120,
+                  top: 90,
+                }}
+              />
+            </Box>
+          </Box>
+          <Stack maxWidth="330px">
+            <Typography variant="h4" fontWeight="bold" color="#33374D">
+              {t("stress-free-learning")}
+            </Typography>
+            <Typography marginTop="20px">
+              {t("stress-free-learning-contents")}
+            </Typography>
+          </Stack>
+        </Stack>
+        <Stack
+          flexDirection="row"
+          justifyContent="space-around"
+          alignItems="center"
+          marginTop="20px"
+          width="100%"
+        >
+          <Box>
+            <Box sx={{ position: "relative" }}>
+              <img src={images.photoBackground3} style={{ width: "300px" }} />
+              <img
+                src={images.dummyImage1}
+                style={{
+                  position: "absolute",
+                  width: "70px",
+                  left: 120,
+                  top: 90,
+                }}
+              />
+            </Box>
+          </Box>
+          <Stack maxWidth="330px">
+            <Typography variant="h4" fontWeight="bold" color="#33374D">
+              {t("stress-free-learning")}
+            </Typography>
+            <Typography marginTop="20px">
+              {t("stress-free-learning-contents")}
+            </Typography>
+          </Stack>
+        </Stack>
       </Stack>
+      <Box sx={{ height: "160px", position: "relative", zIndex: -200 }}>
+        <img
+          style={{
+            position: "absolute",
+            top: -100,
+            width: "800px",
+          }}
+          src={images.rail6}
+        />
+      </Box>
     </Container>
   );
 };

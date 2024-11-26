@@ -7,5 +7,24 @@
   "learn-more": "LEARN MORE",
   "stress-free-learning": "stress-free learning",
   "stress-free-learning-contents": "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-  "you-did-it": "you did it!"
+  "you-did-it": "you did it!",
+  "logout": "logout",
+
+  "unit1-title": "Unit1 Name (Station)",
+  "unit2-title": "Unit2 Name (Station)",
+
+  "lesson1-title-example": "this is one lesson title.",
+  "lesson1-info": "avg. reading time 5 minutes · 3 questions",
+  "lesson1-paragraph1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "lesson1-paragraph2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+  "lesson1-paragraph3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "lesson1-paragraph4": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "lesson1-paragraph5": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+  "lesson1-paragraph6": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+  "lesson1-question1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+  "lesson1-answer1": "This is the correct answer text!",
+  "lesson1-wrong-answer1": "This is the incorrect answer text. There are also explanations for the right answer here!",
+  "lesson1-question2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
+  "lesson1-answer2": "This is the correct answer text!",
+  "lesson1-wrong-answer2": "This is the incorrect answer text. There are also explanations for the right answer here!"
 }

@@ -32,14 +32,6 @@ function DrawerAppBar(props) {
 
   const navItems = [
     {
-      title: "home",
-      path: "/",
-      onClick: () => {
-        console.log(loadUserData());
-        clearUserData();
-      },
-    },
-    {
       title: "login",
       path: "/login",
       onClick: () => {

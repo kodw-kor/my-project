@@ -1,11 +1,16 @@
 import { Box, Button, Container, Stack, styled } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import images from "../assets";
-import LessonOne from "../components/Lessons/LessonOne";
+import UnitOneLessonOne from "../components/lessons/unit1/LessonOne";
+import UnitOneLessonTwo from "../components/lessons/unit1/LessonTwo";
 import { useTranslation } from "react-i18next";
 import useContentsStore from "../stores/contentsStore";
 import { useUserDataStore } from "../stores/userDataStore";
-import { setCurrentLessonData, setCurrentUnitData } from "../apis/firebase";
+import {
+  setCurrentLessonData,
+  setCurrentUnitData,
+  addBadgeCount,
+} from "../apis/firebase";
 
 const CustomButton = styled(Button)({
   backgroundColor: "#f2c94c",
@@ -29,14 +34,17 @@ const LessonPage = () => {
   const { t } = useTranslation();
   const contents = useContentsStore((state) => state.contents);
   const userData = useUserDataStore((state) => state.userData);
+  const setUserData = useUserDataStore((state) => state.setUserData);
+  const { unitName, lessonName } = useParams();
 
   const getLesson = () => {
-    switch (location.pathname) {
-      case "/lesson1":
-        return LessonOne();
+    if (unitName === "unit1" && lessonName === "lesson1") {
+      return UnitOneLessonOne();
+    } else if (unitName === "unit1" && lessonName === "lesson2") {
+      return UnitOneLessonTwo();
     }
   };
-  const onDidItButtonClick = () => {
+  const onDidItButtonClick = async () => {
     const currentUnit = userData.currentUnit;
     const currentLesson = userData.currentLesson;
     const allUnits = Object.keys(contents);
@@ -48,10 +56,16 @@ const LessonPage = () => {
         (e) => e === userData.currentUnit
       );
       if (allUnits.length - 1 >= currentUnitIndex + 1) {
-        setCurrentUnitData(allUnits[currentUnitIndex + 1]);
+        await setCurrentUnitData(allUnits[currentUnitIndex + 1]);
+        await addBadgeCount();
+        await setUserData({ ...userData, badgeCount: userData.badgeCount + 1 });
+        navigate("/");
       }
     } else {
-      setCurrentLessonData(lessonList[currentLessonIndex + 1]);
+      await setCurrentLessonData(lessonList[currentLessonIndex + 1]);
+      await addBadgeCount();
+      await setUserData({ ...userData, badgeCount: userData.badgeCount + 1 });
+      navigate("/");
     }
   };
   return (

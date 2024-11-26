@@ -35,7 +35,7 @@ function HomeAppBar(props) {
 
   const navItems = [
     {
-      title: "logout",
+      title: t("logout"),
       path: "/intro",
       onClick: () => {
         signOut(auth, provider)
@@ -106,7 +106,7 @@ function HomeAppBar(props) {
               alignItems: "center",
             }}
           >
-            <img style={{ width: "50px" }} src={images.ppLogoWhite} />
+            <img style={{ width: "100px" }} src={images.ppLogoWhite} />
             <Box sx={{ marginLeft: "50px" }}>
               <Typography>{loadUserData()?.email}</Typography>
             </Box>
@@ -125,7 +125,7 @@ function HomeAppBar(props) {
                 fontWeight="bold"
                 fontSize="1.2rem"
               >
-                {userData?.currentUnit}
+                {t(userData?.currentUnit + "-title")}
               </Typography>
               <span style={{ marginRight: "20px" }}>
                 <img style={{ width: "130px" }} src={images.train} />

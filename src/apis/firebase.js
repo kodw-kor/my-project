@@ -43,4 +43,23 @@ const setCurrentUnitData = async (currentUnit) => {
   await setDoc(docRef, initalValue, { merge: true });
 };
 
-export { getContent, getUserData, setCurrentLessonData, setCurrentUnitData };
+const addBadgeCount = async () => {
+  const docRef = doc(db, "user-data", loadUserData()?.uid);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    const initalValue = {
+      badgeCount: +docSnap.data().badgeCount + 1,
+    };
+    await setDoc(docRef, initalValue, { merge: true });
+  } else {
+    throw Error("Error on adding badge count");
+  }
+};
+
+export {
+  getContent,
+  getUserData,
+  setCurrentLessonData,
+  setCurrentUnitData,
+  addBadgeCount,
+};

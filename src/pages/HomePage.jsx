@@ -38,7 +38,10 @@ const HomePage = () => {
     { top: 400, right: 100 },
   ].map((e, i) => {
     if (currentLessons.lessonList[i]) {
-      return { ...e, path: currentLessons.lessonList[i] };
+      return {
+        ...e,
+        path: userData.currentUnit + "/" + currentLessons.lessonList[i],
+      };
     }
     return e;
   });

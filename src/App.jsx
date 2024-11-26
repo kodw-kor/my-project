@@ -29,7 +29,7 @@ function App() {
         </Route>
         <Route path="/" element={<HomeAppBar />}>
           <Route index element={<HomePage />} />
-          <Route path="/:lessonId" element={<LessonPage />} />
+          <Route path=":unitName/:lessonName" element={<LessonPage />} />
         </Route>
       </Routes>
       <Footer />
